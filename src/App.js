@@ -9,13 +9,13 @@ const App = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editProduct, setEditProduct] = useState(null);
 
-  // Load data dari local storage
+  // Load data dari local storage saat aplikasi dijalankan
   useEffect(() => {
     const storedProducts = JSON.parse(localStorage.getItem('products'));
     if (storedProducts) {
       setProducts(storedProducts);
     } else {
-      // Jika local storage kosong, set data dummy
+      // Jika tidak ada data, tambahkan data default
       setProducts([
         {
           id: 1,
@@ -53,7 +53,7 @@ const App = () => {
           imgURL: 'https://mitsubishipalembangsumsel.com/wp-content/uploads/2016/11/New-pajero-sport.png',
         }
       ]);
-    }
+    }  
   }, []);
 
   // Simpan data ke local storage setiap kali ada perubahan produk
@@ -62,12 +62,12 @@ const App = () => {
   }, [products]);
 
   const handleAddProduct = () => {
-    setEditProduct(null); // Untuk memastikan form kosong
+    setEditProduct(null); 
     setIsModalOpen(true);
   };
 
   const handleEditProduct = (product) => {
-    setEditProduct(product); // Isi form dengan data produk yang akan diedit
+    setEditProduct(product);
     setIsModalOpen(true);
   };
 
@@ -90,7 +90,10 @@ const App = () => {
       <div className="app">
         <h1>CRUD Local Storage Penjualan Mobil</h1>
         <Button onClick={handleAddProduct} text="Add Product" className="btn-add" />
-        <ProductList products={products} onEdit={handleEditProduct} onDelete={handleDeleteProduct} />
+        <ProductList 
+          products={products} 
+          onEdit={handleEditProduct} 
+          onDelete={handleDeleteProduct} />
         
         {/* ModalForm untuk menambah atau mengedit produk */}
         <ModalForm
